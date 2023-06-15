@@ -8,7 +8,7 @@ function DashboardLayout() {
             <SideNavigation>
                 <SideNavigationMenu text="Dashboard" href="/dashboard/overview" icon="home"/>
                 <SideNavigationMenu text="Users" href="/dashboard/users" icon="users"/>
-                <SideNavigationMenu text="Devices" href="/dashboard/devices" icon="desktop"/>
+                <SideNavigationMenu text="Devices" href="/dashboard/machines" icon="desktop"/>
                 <SideNavigationMenu text="Access Control" href="/dashboard/access_control" icon="lock"/>
                 <SideNavigationMenu text="Settings" href="/dashboard/settings" icon="settings"/>
             </SideNavigation>

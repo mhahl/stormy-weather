@@ -1,4 +1,4 @@
-import {ListUsersAPIResponse} from "~/lib/headscale/properties";
+import {ListMachinesAPIResponse, ListUsersAPIResponse} from "~/lib/headscale/properties";
 
 /**
  * The headers to send to the headscale server.
@@ -26,6 +26,20 @@ const listUsers = async () => {
     return data.users;
 }
 
+/**
+ * List all machines from the headscale server.
+ * @returns {Promise<Array<MachineProperties>>} A list of machines.
+ */
+const listMachines = async () => {
+    const machines = await fetch(`${HEADSCALE_URL}/api/v1/machine`, {
+        method: 'GET',
+        headers: HEADERS
+    });
+    const data: ListMachinesAPIResponse = await machines.json();
+    return data.machines;
+}
+
 export {
     listUsers,
+    listMachines
 }
