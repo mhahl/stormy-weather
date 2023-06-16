@@ -2,41 +2,46 @@ import {createResource} from "solid-js";
 
 
 import {A} from "solid-start";
+import { onMount } from "solid-js";
 import MachineTableRow from "~/components/MachineTableRow";
+
+import $ from "jquery";
+import DataTable from "datatables.net-se";
 
 function MachineTable(props: any) {
 
+    /**
+     * Machine Datatables which is intialised during
+     */
+    let machineTable;
+    let machineTableOptions = {
+        columnDefs: [
+            { targets: 5, orderable: false }, /* Disable sorting on the action column */
+        ]
+    }
+
+    onMount(async () => {
+        machineTable = new DataTable(`#${props.id}`, machineTableOptions);
+    });
+
     return (
         <div>
-
-            <table class="ui table">
+            <table id={props.id} class="ui table">
                 <thead>
-                    <tr>
-                        <th>Status</th>
-                        <th>Machine</th>
-                        <th>Addresses</th>
-                        <th>Tags</th>
-                        <th>Last Seen</th>
-                        <th></th>
-                    </tr>
+                <tr>
+                    <th>Status</th>
+                    <th>Machine</th>
+                    <th>Addresses</th>
+                    <th>Tags</th>
+                    <th>Last Seen</th>
+                    <th></th>
+                </tr>
                 </thead>
                 <tbody>
-                    <For each={props.machines}>{(machine: MachineProperties, _: Number) =>
-                        <MachineTableRow machine={machine} />
-                    }</For>
+                <For each={props.machines}>{(machine: MachineProperties, _: Number) =>
+                    <MachineTableRow machine={machine} />
+                }</For>
                 </tbody>
-                <tfoot class="full-width">
-                    <tr>
-                        <th></th>
-                        <th></th>
-                        <th colspan="5">
-                            <A href={"/dashboard/users/new"} class="ui right floated small primary labeled icon button">
-                                <i class="plus icon"></i> New
-                            </A>
-                        </th>
-                    </tr>
-                </tfoot>
-
             </table>
         </div>
     );

@@ -1,10 +1,9 @@
 import PageHeading from "~/components/PageHeading";
-import UserTable from "~/components/UserTable";
 import ListSegment from "~/components/ListSegment";
 import MachineTable from "~/components/MachineTable";
 import CardStatistic from "~/components/CardStatistic";
 
-import {listMachines, MachineProperties} from '~/lib/headscale';
+import {listMachines} from '~/lib/headscale';
 import {createResource} from "solid-js";
 
 
@@ -27,7 +26,19 @@ function DevicesPage() {
 
     return (
         <div>
-            <PageHeading title={'Machines'} subtitle={'Manage the users in your network and their permissions.'}/>
+
+            <div class="ui grid">
+                <div class="row">
+                    <div class="six wide column">
+                        <PageHeading title={'Machines'} subtitle={'Manage the users in your network and their permissions.'}/>
+                    </div>
+                    <div class="two wide column middle aligned content">
+                        <a href="/dashboard/users/new" class="ui right floated small primary labeled icon button inactive">
+                            <i class="plus icon"></i> Add Machine
+                        </a>
+                    </div>
+                </div>
+            </div>
 
             <div class="ui grid">
                 <div class="row">
@@ -37,13 +48,16 @@ function DevicesPage() {
                     <div class="four wide column">
                         <CardStatistic value={machines()?.filter((m) => !m.online).length.toString()} label="Offline" icon="power off"/>
                     </div>
+                    <div class="four wide column">
+                        <p>shit</p>
+                    </div>
                 </div>
             </div>
 
             <div class="ui grid">
                 <div class="row">
                     <div class="twelve wide column">
-                        <MachineTable machines={machines()}></MachineTable>
+                        <MachineTable id={"machineTable"} machines={machines()}></MachineTable>
                     </div>
                     <div class="four wide column">
                         <ListSegment title={"Links"} items={userLinks}></ListSegment>

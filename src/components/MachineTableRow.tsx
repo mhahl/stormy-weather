@@ -12,6 +12,14 @@ function MachineTableRow(props: any) {
 
     const machine: MachineProperties = props.machine;
 
+    const tagHtml = (tag: string, colour: string) => {
+        return (
+            <a class={"ui small basic label " + colour}>
+                {tag}
+            </a>
+        )
+    }
+
     return (
         <>
             <tr>
@@ -29,9 +37,12 @@ function MachineTableRow(props: any) {
                     </code>
                 </td>
                 <td>
-                    {machine.validTags.map((tag: string) => tag).join(", ")}
-                    {machine.forcedTags.map((tag: string) => tag).join(", ")}
-                    {machine.invalidTags.map((tag: string) => tag).join(", ")}
+                    <a class="ui small basic label">
+
+                    </a>
+                    {machine.validTags.map((tag: string) => tagHtml(tag, 'black'))}
+                    {machine.forcedTags.map((tag: string) => tagHtml(tag, 'blue'))}
+                    {machine.invalidTags.map((tag: string) => tagHtml(tag, 'red'))}
                 </td>
                 <td class={"collapsing"}>
                     {dayjs(machine.lastSeen).fromNow()}
